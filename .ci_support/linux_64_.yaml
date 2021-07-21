@@ -1,11 +1,11 @@
 cdt_name:
-- cos6
+- cos7
 channel_sources:
-- conda-forge,defaults
+- deepmodeling,https://conda.deepmodeling.org,defaults
 channel_targets:
-- conda-forge main
+- deepmodeling main
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- ghcr.io/deepmd-kit-recipes/linux-anvil-cuda:11.3
 zip_keys:
 - - cdt_name
   - docker_image
