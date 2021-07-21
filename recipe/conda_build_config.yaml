@@ -10,14 +10,14 @@ c_compiler:
   - vs2017                     # [win]
 c_compiler_version:            # [unix]
   - 11                         # [osx]
-  - 9                          # [linux]
+  - 8                          # [linux]
 cxx_compiler:
   - gxx                        # [linux]
   - clangxx                    # [osx]
   - vs2017                     # [win]
 cxx_compiler_version:          # [unix]
   - 11                         # [osx]
-  - 9                          # [linux]
+  - 8                          # [linux]
 fortran_compiler:              # [unix or win64]
   - gfortran                   # [linux64 or (osx and x86_64)]
   - gfortran                   # [aarch64 or ppc64le or armv7l]
@@ -25,7 +25,7 @@ fortran_compiler:              # [unix or win64]
 fortran_compiler_version:      # [unix or win64]
   - 11                         # [osx and arm64]
   - 9                          # [osx and x86_64]
-  - 9                          # [linux]
+  - 8                          # [linux]
   - 5                          # [win64]
 m2w64_c_compiler:              # [win]
   - m2w64-toolchain            # [win]
@@ -40,10 +40,12 @@ cuda_compiler:                 # [linux64]
   - nvcc                       # [linux64]
 cuda_compiler_version:
   - None
-  - 10.2                       # [linux64]
+  - 10.1                       # [linux64]
+  - 11.3                       # [linux64]
 cudnn:
   - undefined
   - 7                          # [linux64]
+  - 8                          # [linux64]
 
 _libgcc_mutex:
   - 0.1 conda_forge
@@ -101,23 +103,19 @@ VERBOSE_CM:
 
 # dual build configuration
 channel_sources:
-  - conda-forge,defaults                        # [not (aarch64 or armv7l or (osx and arm64))]
-  - conda-forge/label/rust_dev,conda-forge      # [osx and arm64]
-  - conda-forge                                 # [aarch64]
-  - conda-forge,c4armv7l,defaults               # [armv7l]
+  - deepmodeling,https://conda.deepmodeling.org,defaults
 
 channel_targets:
-  - conda-forge main
+  - deepmodeling main
 
 cdt_name:  # [linux]
-  - cos6   # [linux64 and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos6"]
-  - cos7   # [linux64 and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos7"]
+  - cos7   # [linux64]
   - cos7   # [linux and aarch64]
   - cos7   # [linux and ppc64le]
   - cos7   # [linux and armv7l]
 
-  - cos6   # [linux64 and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos6"]
-  - cos7   # [linux64 and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos7"]
+  - cos7   # [linux64]
+  - cos7   # [linux64]
 
 docker_image:                                   # [os.environ.get("BUILD_PLATFORM", "").startswith("linux-")]
   - quay.io/condaforge/linux-anvil-comp7        # [os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos6"]
@@ -126,8 +124,8 @@ docker_image:                                   # [os.environ.get("BUILD_PLATFOR
   - quay.io/condaforge/linux-anvil-ppc64le      # [os.environ.get("BUILD_PLATFORM") == "linux-ppc64le"]
   - quay.io/condaforge/linux-anvil-armv7l       # [os.environ.get("BUILD_PLATFORM") == "linux-armv7l"]
 
-  - quay.io/condaforge/linux-anvil-cuda:10.2       # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos6"]
-  - quay.io/condaforge/linux-anvil-cos7-cuda:10.2  # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64" and os.environ.get("DEFAULT_LINUX_VERSION", "cos6") == "cos7"]
+  - quay.io/condaforge/linux-anvil-cos7-cuda:10.1  # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64"]
+  - ghcr.io/deepmd-kit-recipes/linux-anvil-cuda:11.3  # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64"]
 
 zip_keys:
   -                             # [unix]
@@ -570,11 +568,10 @@ ntl:
 # we build for the oldest version possible of numpy for forward compatibility
 numpy:
   # part of a zip_keys: python, python_impl, numpy
-  - 1.17   # [not (osx and arm64)]
-  - 1.17   # [not (osx and arm64)]
-  - 1.17   # [not (osx and arm64)]
-  - 1.19   # [osx and arm64]
-  - 1.19
+  - 1.20   # [not (osx and arm64)]
+  - 1.20   # [not (osx and arm64)]
+  - 1.20   # [osx and arm64]
+  - 1.20
 occt:
   - '7.5'
 openblas:
@@ -622,13 +619,11 @@ pybind11_abi:
   - 4
 python:
   # part of a zip_keys: python, python_impl, numpy
-  - 3.6.* *_cpython    # [not (osx and arm64)]
-  - 3.7.* *_cpython    # [not (osx and arm64)]
-  - 3.8.* *_cpython
-  - 3.9.* *_cpython
+  - 3.7.*    # [not (osx and arm64)]
+  - 3.8.*
+  - 3.9.*
 python_impl:
   # part of a zip_keys: python, python_impl, numpy
-  - cpython   # [not (osx and arm64)]
   - cpython   # [not (osx and arm64)]
   - cpython
   - cpython
