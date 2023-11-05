@@ -623,7 +623,7 @@ pybind11_abi:
   - 4
 python:
   # part of a zip_keys: python, python_impl, numpy
-  - 3.8.*
+  - 3.8.*  # [not (osx and arm64)]
   - 3.9.*
   - 3.10.*
 python_impl:
