@@ -540,7 +540,7 @@ mimalloc:
 mkl:
   - 2021
 mpich:
-  - 3
+  - 4
 mpfr:
   - 4
 mumps_mpi:
